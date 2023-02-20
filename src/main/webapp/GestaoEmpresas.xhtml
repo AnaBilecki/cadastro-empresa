@@ -49,11 +49,14 @@
 		        	actionListener="#{gestaoEmpresasBean.excluir}"
 		        	update="messages empresasDataTable toolbar"
 		        	process="@this">
-		        	<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão" 
+		        	<p:confirm icon="pi pi-exclamation-triangle" header="Confirmação de exclusão" 
 		        		message="Deseja excluir a empresa?" />
 		        </p:commandButton>
 		        
-		        <p:commandButton title="Exportar para o Excel" icon="pi pi-file-excel" />
+		        <p:commandButton title="Exportar para o Excel" icon="pi pi-file-excel"
+		        	ajax="false">
+		        	<p:dataExporter type="xls" target="empresasDataTable" fileName="Empresas" />
+		        </p:commandButton>
 			</f:facet>
 		</p:toolbar>
 		
