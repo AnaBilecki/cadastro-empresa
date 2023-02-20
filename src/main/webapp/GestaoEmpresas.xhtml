@@ -18,7 +18,7 @@
 	<h:form id="frm">
 		<p:messages id="messages" closable="true" />
 		
-		<p:toolbar>
+		<p:toolbar id="toolbar">
 			<f:facet name="left">
 				<p:inputText id="termoPesquisa" placeholder="Digite um termo para pesquisa" 
 					size="30" value="#{gestaoEmpresasBean.termoPesquisa}" />
@@ -36,9 +36,11 @@
 		        	<p:resetInput target="empresaDialog" />
 		        </p:commandButton>
 		        
-		        <p:commandButton title="Editar" icon="pi pi-file-edit" />
+		        <p:commandButton title="Editar" icon="pi pi-file-edit"
+		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 		        
-		        <p:commandButton title="Excluir" icon="pi pi-trash" />
+		        <p:commandButton title="Excluir" icon="pi pi-trash"
+		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 		        
 		        <p:commandButton title="Exportar para o Excel" icon="pi pi-file-excel" />
 			</f:facet>
@@ -48,7 +50,13 @@
 	
 		<p:dataTable id="empresasDataTable" value="#{gestaoEmpresasBean.listaEmpresas}"
 			var="empresa" emptyMessage="Nenhuma informação a ser exibida"
-			paginator="true" rows="10" paginatorPosition="bottom">
+			paginator="true" rows="10" paginatorPosition="bottom"
+			selectionMode="single" selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+			
+			<p:ajax event="rowSelect" update="frm:toolbar" />
+			
+			<p:ajax event="rowUnselect" update="frm:toolbar" />
+			
 			<p:column headerText="Razão Social" sortBy="#{empresa.razaoSocial}">
 				<h:outputText value="#{empresa.razaoSocial}" />
 			</p:column>
