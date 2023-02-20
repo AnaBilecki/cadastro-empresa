@@ -32,7 +32,9 @@
 		        <p:commandButton value="Nova" icon="pi pi-plus-circle" 
 		        	actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
 		        	oncomplete="PF('empresaDialogWidgetVar').show()"
-		        	update="empresaDialog" process="@this" />
+		        	update="empresaDialog" process="@this">
+		        	<p:resetInput target="empresaDialog" />
+		        </p:commandButton>
 		        
 		        <p:commandButton title="Editar" icon="pi pi-file-edit" />
 		        
