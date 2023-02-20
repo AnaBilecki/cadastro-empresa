@@ -15,10 +15,8 @@
 		<f:viewAction action="#{gestaoEmpresasBean.listar}" />
 	</f:metadata>
 	
-	<h:form>
-		<p:messages closable="true">
-            <p:autoUpdate/>
-        </p:messages>
+	<h:form id="frm">
+		<p:messages id="messages" closable="true" />
 		
 		<p:toolbar>
 			<f:facet name="left">
@@ -26,7 +24,7 @@
 					size="30" value="#{gestaoEmpresasBean.termoPesquisa}" />
 				
 				<p:commandButton value="Pesquisar" icon="pi pi-search"
-					actionListener="#{gestaoEmpresasBean.pesquisar}" update="empresasDataTable"
+					actionListener="#{gestaoEmpresasBean.pesquisar}" update="empresasDataTable messages"
 					process="@this termoPesquisa" />
 				
 				<i class="pi pi-bars px-2"/>
@@ -68,6 +66,8 @@
 		
 		<p:dialog id="empresaDialog" header="Nova empresa" widgetVar="empresaDialogWidgetVar" modal="true"
 			resizable="false" closeOnEscape="true">
+			<p:messages id="empresaMessages" />
+			
 			<h:panelGrid id="empresaPanelGrid" columns="2" 
 				rendered="#{gestaoEmpresasBean.empresa ne null}">
 				<p:outputLabel value="Razão social: " for="razaoSocial" />
@@ -75,7 +75,7 @@
 					value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
 				
 				<p:outputLabel value="Nome fantasia: " for="nomeFantasia" />
-				<p:inputText id="nomeFantasia" size="80" maxlength="120"
+				<p:inputText id="nomeFantasia" size="80" maxlength="80"
 					value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
 				
 				<p:outputLabel value="Tipo empresa: " for="tipo" />
@@ -105,8 +105,8 @@
 				
 				<h:outputLabel />
 				<p:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar}"
-					update="empresasDataTable empresaPanelGrid"
-					oncomplete="PF('empresaDialogWidgetVar').hide()" process="empresaDialog" />
+					update="empresaPanelGrid empresaMessages" 
+					oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()" process="empresaDialog" />
 			</h:panelGrid>
 		</p:dialog>
 	</h:form>
