@@ -45,7 +45,10 @@
 		        </p:commandButton>
 		        
 		        <p:commandButton title="Excluir" icon="pi pi-trash"
-		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
+		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+		        	actionListener="#{gestaoEmpresasBean.excluir}"
+		        	update="messages empresasDataTable toolbar"
+		        	process="@this" />
 		        
 		        <p:commandButton title="Exportar para o Excel" icon="pi pi-file-excel" />
 			</f:facet>
