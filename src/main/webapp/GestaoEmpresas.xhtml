@@ -4,7 +4,7 @@
  	xmlns:f="http://xmlns.jcp.org/jsf/core"
  	xmlns:p="http://primefaces.org/ui"
  	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
- 	template="WEB-INF/template/layout.xhtml">
+ 	template="WEB-INF/template/Layout.xhtml">
 
 <ui:define name="titulo">
 	Cadastro de Empresas
@@ -37,7 +37,12 @@
 		        </p:commandButton>
 		        
 		        <p:commandButton title="Editar" icon="pi pi-file-edit"
-		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
+		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+		        	actionListener="#{gestaoEmpresasBean.prepararEdicao}"
+		        	oncomplete="PF('empresaDialogWidgetVar').show()"
+		        	update="empresaDialog" process="@this">
+		        	<p:resetInput target="empresaDialog" />
+		        </p:commandButton>
 		        
 		        <p:commandButton title="Excluir" icon="pi pi-trash"
 		        	disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
